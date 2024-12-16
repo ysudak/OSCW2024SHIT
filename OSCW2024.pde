@@ -20,13 +20,13 @@ void setup(){
   //Arguments: Name, Code, IRQ
   myOS.addToKernel(new IdleKernel("idle", "I", 5));
   //Arguments: Name, Code, IRQ, Memory manager Algorithm
-  myOS.addToKernel(new MemoryManagerKernel("memoryManager", "*M", 3, new DefaultMM()));
+  myOS.addToKernel(new MemoryManagerKernel("memoryManager", "*M", 3, new FirstFitMM()));
   //Arguments: Name, Code, IRQ
   myOS.addToKernel(new CreateProcessKernel("createProcess", "C", 2));
   //Arguments: Name, Code, IRQ
   myOS.addToKernel(new AdmitProcessKernel("admitProcess", "A", 1));
   //Arguments: Name, Code, IRQ
-  myOS.addToKernel(new SchedulerKernel("scheduler", "S", 4, new DefaultScheduler()));
+  myOS.addToKernel(new SchedulerKernel("scheduler", "S", 4, new ShortestJobFirstScheduler()));
   //Arguments: Name, Code, IRQ, scheduler Algorithm
   myOS.addToKernel(new ExitProcessKernel("exitProcess", "X", 6));
   sim = new Simulator();

@@ -115,3 +115,60 @@ public class DefaultMM extends MemoryManagerAlgorithm{
   }
   
 }
+
+
+public class FirstFitMM extends MemoryManagerAlgorithm{
+
+  FirstFitMM(){
+    super();
+    type = MMANAGERTYPE.FIXED;
+  }
+
+  public Partition selectPartition(){
+    Partition result = null;
+    for (int i=1; i<myOS.partitionTable.size(); i++) {
+      if (myOS.partitionTable.get(i).isFree && myOS.partitionTable.get(i).size >= myOS.newProcessImage.length()) {
+        result = myOS.partitionTable.get(i);
+        result.isFree = false;
+        break;
+      }
+    }
+    if (result != null) {
+      sim.addToLog("  >Memory Manager: Partition with BA: "+result.baseAddress+" was found. Starting Process Creator");
+      myOS.raiseIRQ("createProcess");
+    } else {
+      sim.addToLog("  >Memory Manager: No partition was found. Starting Process Scheduler");
+      sim.requestFails++;
+      myOS.raiseIRQ("scheduler");
+    }
+    return result;
+ }
+}
+
+public class WorstFitMM extends MemoryManagerAlgorithm{
+
+  WorstFitMM(){
+    super();
+    type = MMANAGERTYPE.FIXED;
+  }
+
+  public Partition selectPartition(){
+    Partition result = null;
+    for (int i=1; i<myOS.partitionTable.size(); i++) {
+      if (myOS.partitionTable.get(i).isFree && myOS.partitionTable.get(i).size >= myOS.newProcessImage.length() || myOS.partitionTable.get(i).size > result.size) {
+        result = myOS.partitionTable.get(i);
+      }
+    }
+    if (result != null) {
+      result.isFree = false;
+      sim.addToLog("  >Memory Manager: Partition with BA: "+result.baseAddress+" was found. Starting Process Creator");
+      myOS.raiseIRQ("createProcess");
+    } else {
+      sim.addToLog("  >Memory Manager: No partition was found. Starting Process Scheduler");
+      sim.requestFails++;
+      myOS.raiseIRQ("scheduler");
+    }
+    return result;
+  }
+
+}
