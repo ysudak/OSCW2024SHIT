@@ -1,0 +1,8 @@
+.vscode
+.vscode/
+out
+out/
+.out
+.out/
+
+*.log

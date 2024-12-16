@@ -882,8 +882,13 @@
 ============== SIMULATION STEP 350 ==============
 >myPC: At time 350 executed a I
  >myOS: System is idle. Waiting for user input
+============== SIMULATION STEP 351 ==============
+>myPC: At time 351 fetched a I
+============== SIMULATION STEP 352 ==============
+>myPC: At time 352 executed a I
+ >myOS: System is idle. Waiting for user input
 ======================================
- - Simulation ended on Time 350
+ - Simulation ended on Time 352
 Statistics:
 :   PID   : LoadTime : startTim : respTime : TurnTime :     Name
 :         6        14        16         2        64 program1.exe
@@ -900,8 +905,8 @@ Statistics:
  - Average Load Time         = 65.0
  - Average Responce Time     = 100.75
  - Average Turnarround Time  = 134.0
- - Total simulation time     = 350
- - Idle time (IT)            = 42
+ - Total simulation time     = 352
+ - Idle time (IT)            = 44
  - Context switch time (CWT) = 126
  - Utility time (UT)         = 182
- - Simulation time = idle + CWT + UT +(1?) [350 = 350 +(1?)]
+ - Simulation time = idle + CWT + UT +(1?) [352 = 352 +(1?)]
